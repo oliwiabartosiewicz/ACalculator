@@ -264,9 +264,62 @@ class Program
      * EXAMPLE
      * 100% of 50 = 50
      */
-    
+
     static void Percentages()
+    {
+
+        double percentage = GetNumber("Enter percentage: ");
+        double total = GetNumber("Enter total: ");
+        double result= (percentage / 100) * total;
+        
+        DisplayResult(percentage +"% of" + total, result);
+    }
     
+    /*
+     * SECTION 9 - AVERAGE
+     * CALCULATES THE AVERAGE OF TWO NUMBERS
+     * Divides the sum of the two numbers by the total number of numbers
+     *
+     * EXAMPLE
+     * Average of 10 and 20 = 15
+     */
+
+
+    static void CalculateAverage()
+    {
+        int amount = GetInteger("Enter the number of numbers: ");
+        if (amount <= 0)
+        {
+            Console.WriteLine( "Enter at least one number");
+            return;
+        }
+        double total = 0;
+        
+        for (int i = 1; i <= amount; i++)
+        {
+            total += GetNumber("Enter number" + i + ": ");
+            
+        }
+
+        double average = total / amount;
+        DisplayResult("Average of " + amount + " numbers", average);
+    }
+    
+    
+    /*
+     * SECTION 10 - FIND LARGEST AND SMALLEST
+     * CALCULATES THE LARGEST AND SMALLEST NUMBER IN A LIST
+     * Uses the built-in functions min() and max()
+     *
+     * EXAMPLE
+     * Largest number in the list is 100
+     * Smallest number in the list is 1
+     */
+
+    static void FindLargestAndSmallest()
+    {
+        
+    }
     }
     
     
