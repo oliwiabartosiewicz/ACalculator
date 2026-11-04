@@ -41,7 +41,7 @@ class Program
                 case 1:
                     BasicCalculation("+");
                     break;
-                
+
                 case 2:
                     BasicCalculation("-");
                     break;
@@ -49,55 +49,55 @@ class Program
                 case 3:
                     BasicCalculation("*");
                     break;
-                
+
                 case 4:
                     BasicCalculation("/");
                     break;
-                
+
                 case 5:
                     BasicCalculation("%");
                     break;
                 case 6:
                     CalculatePower("%");
                     break;
-                
+
                 case 7:
                     SquareRoot();
                     break;
-                
+
                 case 8:
                     Percentages();
                     break;
-                
+
                 case 9:
                     CalculateAverage();
                     break;
-                
+
                 case 10:
                     FindLargestAndSmallest();
                     break;
-                
+
                 case 11:
                     CalculateFactorial();
                     break;
-                
+
                 case 12:
                     Trigonometry();
                     break;
-                
+
                 case 13:
                     RoundNumber();
                     break;
-                
+
                 case 14:
                     ViewHistory();
                     break;
-                
+
                 case 15:
                     history.Clear();
                     Console.WriteLine("History cleared.");
                     break;
-                
+
                 case 16:
                     running = false;
                     Console.WriteLine("Thank you for using the calculator baddie");
@@ -107,22 +107,26 @@ class Program
                     Console.WriteLine("Invalid choice. Please try again.");
                     break;
                 
-                kjdfbd
-                dfniodnv
-                vjk
-                    
-                    
             }
-
-
-
-
-
-    }
-
-    }
+        }
+    } 
     
-    
+    static double GetNumber( string message )
+    {
+        double number;
+        while (true)
+        {
+            Console.Write(message);
+            if (double.TryParse(Console.ReadLine(), out number) &&
+                !double.IsNaN(number) &&
+                !double.IsInfinity(number))
+                {
+                    return number;
+                }
+            Console.WriteLine("Invalid input. Please enter a valid number.");
+        }
+        
+   
     
     
     
