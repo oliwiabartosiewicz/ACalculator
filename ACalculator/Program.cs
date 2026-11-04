@@ -1,4 +1,6 @@
-﻿namespace ACalculator;
+﻿using System.Data;
+
+namespace ACalculator;
 using System.Collections.Generic;
 
 
@@ -13,10 +15,13 @@ class Program
     {
         bool running = true;
         
-        Console.WriteLine("CALCULATOR");
+       
 
         while (running)
         {
+            
+            Console.Clear();
+            Console.WriteLine("------CALCULATOR------");
             Console.WriteLine("1. Addition");
             Console.WriteLine("2. Subtraction");
             Console.WriteLine("3. Multiplication");
@@ -33,6 +38,8 @@ class Program
             Console.WriteLine("14. View History");
             Console.WriteLine("15. Clear History");
             Console.WriteLine("16. Exit");
+            
+            
 
             int choice = GetInteger("Enter your choice: ");
 
@@ -103,10 +110,16 @@ class Program
                     Console.WriteLine("Thank you for using the calculator baddie");
                     break;
 
+                
                 default:
                     Console.WriteLine("Invalid choice. Please try again.");
                     break;
-                
+            }
+            
+            if (running)
+            {
+                Console.WriteLine("\nPress Enter to return to the menu...");
+                Console.ReadLine();
             }
         }
     } 
