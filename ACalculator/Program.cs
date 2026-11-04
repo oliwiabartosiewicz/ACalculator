@@ -120,9 +120,9 @@ class Program
      * a while loop repeats if the input is incorrect
      * prevents NaN and infinity values
      */
-    
-    
-    static double GetNumber( string message )
+
+
+    static double GetNumber(string message)
     {
         double number;
         while (true)
@@ -131,18 +131,19 @@ class Program
             if (double.TryParse(Console.ReadLine(), out number) &&
                 !double.IsNaN(number) && // if not a number 
                 !double.IsInfinity(number)) // if not infinity
-                {
-                    return number;
-                }
+            {
+                return number;
+            }
+
             Console.WriteLine("Invalid input. Please enter a valid number.");
         }
-        
-        /* Integer INPUT METHOD
-         used when program needs a whole number 
-         repeats until a valid integer is entered 
-         EXAMPLES
-         Menu choices and factorial values
-        */
+    }
+    /* Integer INPUT METHOD
+     used when program needs a whole number
+     repeats until a valid integer is entered
+     EXAMPLES
+     Menu choices and factorial values
+    */
         
         static int GetInteger(string message)
         {
@@ -205,7 +206,7 @@ class Program
                 result = a % b;
                 break;
         }
-        DisplayResult (a + " " + operation + " " + b + " = " + result);
+        DisplayResult (a + " " + operation + " " + b, result);
 
     }
     
@@ -318,9 +319,189 @@ class Program
 
     static void FindLargestAndSmallest()
     {
+        int amount = GetInteger("Enter the number of numbers: ");
+        if (amount <= 0)
+        {
+            Console.WriteLine("Enter at least one number");
+            return;
+        }
+        double largest = GetNumber("Enter number:1 ");
+        double smallest = largest;
+
+        for (int i = 2; i <= amount; i++)
+        {
+            double number =GetNumber("Enter number" + i + ": ");
+            if (number > largest)
+                largest = number;
+            if (number < smallest)
+                smallest = number;
+        }
+        Console.WriteLine("Largest number in the list is " + largest);
+        Console.WriteLine("Smallest number in the list is " + smallest);
+    }
+    /*
+     * SECTION 11 - FACTORIAL
+     * CALCULATES THE FACTORIAL OF A NUMBER
+     * Uses the built-in function factorial()
+     *
+     * EXAMPLE
+     * Factorial of 5 is 120
+     */
+
+
+    static void CalculateFactorial()
+    {
+        int number = GetInteger("Enter a number (0-170): ");
+        if (number < 0 || number > 170)
+        {
+            Console.WriteLine("Error: Factorial is not defined for numbers greater than 170.");
+            return;
+        }
+
+        double result = 1;
+        for (int i = 1; i <= number; i++)
+        {
+            result *= i;
+        }
+        DisplayResult(number + "! = ",result);
+    }
+    
+    /*
+     * SECTION 12 - Trigonometry
+     * CALCULATES THE SINE, COSINE, AND TANGENT OF A NUMBER55
+     * Uses the built-in functions sin(), cos(), tan(), and asin()
+     *
+     * uses a switch statement to select
+     * checks when tangest is undefined
+     * FORMULA
+     * Radians = Degrees * PO/180
+     * 
+     * EXAMPLE
+     * Sine of 0 is 0
+     * Cosine of 90 degrees is 1
+     */
+
+    static void Trigonometry()
+
+    {
+        Console.WriteLine("Options");
+        Console.WriteLine("1. Sine");
+        Console.WriteLine("2. Cosine");
+        Console.WriteLine("3. Tangent");
+
+        int choice = GetInteger("Enter your choice: ");
+        double degrees = GetNumber("Enter angle in degrees: ");
+        // converts degrees into radians 
+        double radians = degrees * Math.PI / 180;
+        double result;
+        switch (choice)
+        {
+            case 1:
+                result = Math.Sin(radians);
+                DisplayResult("Sin(" + degrees + ")", result);
+                break;
+            case 2:
+                result = Math.Cos(radians);
+                DisplayResult("Cos(" + degrees + ")", result);
+                break;
+            case 3:
+                //Tangent is undefined  when cosine is zero.
+                if (Math.Abs(Math.Cos(radians)) < 0.0000001)
+                {
+                    Console.WriteLine("Error: Tangent is undefined at this angle.");
+                    return;
+                }
+
+                result = Math.Tan(radians);
+                DisplayResult("Tan(" + degrees + ")", result);
+                break;
+            default:
+                Console.WriteLine("Invalid choice. Please try again.");
+                break;
+        }
+    }
+    /*
+     * SECTION 13 - ROUNDING
+     * ROUNDS A NUMBER TO THE NEAREST INTEGER
+     * Uses the built-in function Math.Round()
+     *
+     * EXAMPLE
+     * Rounding 3.1415926535897932384626433832795 is 3.14
+     */
+
+
+    static void RoundNumber()
+    {
+        double number = GetNumber("Enter number");
+        int decimals = GetInteger("Decimal places (0-15): ");
+        if (decimals < 0 || decimals > 15)
+        {
+            Console.WriteLine("Error: Decimal places must be between 0 and 15.");
+            return;
+        }
+
+        double result = Math.Round(number, decimals);
+        DisplayResult("Rounded number" + number, result);
+    }
+    
+    /*
+     * SECTION 14 - VIEW HISTORY
+     * DISPLAYS THE HISTORY OF CALCULATIONS
+     * Uses a list to display each calculation
+     * Uses history.Count to check if the listcontains any saved calculations
+     * Uses for each to display every item
+     *
+     * EXAMPLE
+     * 1 + 2 = 3
+     * 3 - 2 = 1
+     */
+
+
+    static void ViewHistory()
+    {
+        Console.WriteLine("CALCULATION HISTORY:");
+        if (history.Count == 0)
+        {
+            Console.WriteLine("No calculations yet.");
+            return;
+        }
         
-    }
+        foreach (string item in history)
+            {
+                Console.WriteLine(item);
+            }
     }
     
     
-}
+    
+    
+    
+    /*
+     * SECTION 15 - DISPLAY RESULT
+     * DISPLAYS THE RESULT OF A CALCULATION
+     * combines the calculation and result into one string
+     * Saves the result in calculation history
+     * Checks for invalid numerical results
+     *
+     * this method is reused by other methods to avoid repeating the same code 
+
+    */
+
+    static void DisplayResult(string calculation, double result)
+    {
+        if (double.IsNaN(result)|| double.IsInfinity(result))
+        {
+            Console.WriteLine("Error: Invalid result its outside the supported range.");
+            return;
+        }
+        string output = calculation + " = " + result;
+        Console.WriteLine("\n RESULT:"+output);
+        //ADDS THE COMPLETED calculation to the history list
+        history.Add(output);
+    }
+    
+    
+    }
+    
+    
+    
